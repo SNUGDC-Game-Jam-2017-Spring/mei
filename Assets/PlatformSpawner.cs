@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 
 public class PlatformSpawner : MonoBehaviour {
     public enum SceneState {
-        Intro, Easy, Hard
+        Easy, Hard
     }
     public SceneState State {get; set;}
 
@@ -15,12 +15,14 @@ public class PlatformSpawner : MonoBehaviour {
     [SerializeField] private GameObject rightWall;
 
     [SerializeField] private float randomWalkMax;
+    [SerializeField] private float randomWalkMaxIncrement;
     [SerializeField] private float spawnPosIncrementY;
 
     private float spawnPosX;
     private float spawnPosY;
     private float sceneBoundLeft;
     private float sceneBoundRight;
+    private int numPlatforms;
 
     float timer = 0.0f;
 
@@ -36,8 +38,6 @@ public class PlatformSpawner : MonoBehaviour {
 
     void Update()
     {
-        if (State != SceneState.Intro) {
-        }
     }
 
     public float SpawnNextPlatforms(int numPlatforms)
@@ -67,6 +67,10 @@ public class PlatformSpawner : MonoBehaviour {
         spawnPosY += spawnPosIncrementY;
 
         GameObject platform = Instantiate(platformPrefab, new Vector3(spawnPosX, spawnPosY, 0.0f), Quaternion.identity);
+        numPlatforms++;
+
+        randomWalkMax += randomWalkMaxIncrement;
+
         return platform;
     }
 }

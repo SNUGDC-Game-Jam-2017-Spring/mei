@@ -789,6 +789,7 @@ MonoBehaviour:
   leftWall: {fileID: 251763527}
   rightWall: {fileID: 171048803}
   randomWalkMax: 1
+  randomWalkMaxIncrement: 0.05
   spawnPosIncrementY: 1
   platformPrefab: {fileID: 1040873298461516, guid: 32c9020d46ade2248b12a8709814b249,
     type: 2}
