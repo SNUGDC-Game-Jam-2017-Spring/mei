@@ -2,43 +2,70 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlatformSpawner : MonoBehaviour {
-    public enum MapState {
+    public enum SceneState {
         Intro, Easy, Hard
     }
-    public MapState State {get; set;}
+    public SceneState State {get; set;}
 
-    float randomWalkMax = 3.0f;
-    float createInterval = 3.0f;
-    float spawnPosX = 0.0f;
-    float spawnPosY = 0.0f;
-    float spawnPosIncrementY = 1.0f;
+    // initial spawn position is extracted from this gameobject
+    [SerializeField] private GameObject spawnStartPositionObj;
 
-    Random random = new Random();
+    // left and right wall (to check collision)
+    [SerializeField] private GameObject leftWall;
+    [SerializeField] private GameObject rightWall;
+
+    [SerializeField] private float randomWalkMax;
+    [SerializeField] private float spawnPosIncrementY;
+
+    private float spawnPosX;
+    private float spawnPosY;
+    private float sceneBoundLeft;
+    private float sceneBoundRight;
+
     float timer = 0.0f;
 
     public GameObject platformPrefab;
 
-    void Start()
+    void Awake()
     {
-
+        spawnPosX = 0.0f;
+        spawnPosY = spawnStartPositionObj.transform.position.y;
+        sceneBoundLeft = leftWall.transform.position.x;
+        sceneBoundRight = rightWall.transform.position.x;
     }
 
     void Update()
     {
-        if (State != MapState.Intro) {
-            float dt = Time.deltaTime;
-            timer += dt;
-            if (timer >= createInterval) {
-                spawnPosX += Random.Range(-randomWalkMax, randomWalkMax);
-                spawnPosY += spawnPosIncrementY;
-                timer = 0.0f;
-            }
-            SpawnPlatform();
+        if (State != SceneState.Intro) {
         }
+    }
+
+    public float SpawnNextPlatforms(int numPlatforms)
+    {
+        GameObject lastSpawnedPlatform = null;
+        for (int i = 0; i < numPlatforms; i++)
+        {
+            lastSpawnedPlatform = SpawnPlatform();
+        }
+        return lastSpawnedPlatform.transform.position.y;
     }
 
     public GameObject SpawnPlatform()
     {
+        spawnPosX += Random.Range(-randomWalkMax, randomWalkMax);
+        if (spawnPosX < sceneBoundLeft)
+        {
+            float bounce = sceneBoundLeft - spawnPosX;
+            spawnPosX += 2 * bounce;
+        }
+        else if (spawnPosX > sceneBoundRight)
+        {
+            float bounce = spawnPosX - sceneBoundRight;
+            spawnPosX -= 2 * bounce;
+        }
+
+        spawnPosY += spawnPosIncrementY;
+
         GameObject platform = Instantiate(platformPrefab, new Vector3(spawnPosX, spawnPosY, 0.0f), Quaternion.identity);
         return platform;
     }
