@@ -559,16 +559,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732ddf6e8a6facd4697c300b5e7f0b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower1: 1
+  jumpPower1: 10
   xAxisVelocity: 0
   yAxisVelocity: 0
-  maxXAxisVelocity: 10
+  maxXAxisVelocity: 5
   maxYAxisVelocity: 10
   delta: {x: 0, y: 0}
   lastMousePosition: {x: 0, y: 1, z: 0}
   MousePosition: {x: 0, y: 0, z: 0}
   Force: {x: 0, y: 0}
-  ResistForce: {x: 0, y: 0}
+  catPosition: {x: 0, y: 0}
 --- !u!58 &332850664
 CircleCollider2D:
   m_ObjectHideFlags: 0
