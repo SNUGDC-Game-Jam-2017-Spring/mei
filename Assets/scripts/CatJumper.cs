@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CatJumper : MonoBehaviour {
-
+    public CatAggro aggro;
     public float jumpPower1 = 10.0f;
     public float xAxisVelocity = 0.0f;
     public float yAxisVelocity = 0.0f;
@@ -22,6 +22,8 @@ public class CatJumper : MonoBehaviour {
 
 
     void Start () {
+        Debug.Assert(aggro != null);
+
         for (int i = 0; i < 5; i++)
         {
             recording[i] = Vector2.zero;
@@ -58,7 +60,7 @@ public class CatJumper : MonoBehaviour {
             lastMousePosition = recording[2];
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && aggro.aggroMeter > aggro.aggroThreshold)
         {
             delta = ( MousePosition - lastMousePosition)/Time.deltaTime;
             if (delta.y < 0)

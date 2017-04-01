@@ -5,6 +5,7 @@ public class CatAggro : MonoBehaviour
     public Collider2D aggroBound;
 
     public float aggroMeter = 0;
+    public float aggroThreshold = 1000f;
 
     public float decayRate = 0.1f; // per second
     public float aggroCoeff = 0.1f;

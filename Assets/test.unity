@@ -559,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732ddf6e8a6facd4697c300b5e7f0b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aggro: {fileID: 332850665}
   jumpPower1: 10
   xAxisVelocity: 0
   yAxisVelocity: 0
@@ -597,6 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aggroBound: {fileID: 332850664}
   aggroMeter: 0
+  aggroThreshold: 1000
   decayRate: 0.1
   aggroCoeff: 0.1
 --- !u!1 &539399515
