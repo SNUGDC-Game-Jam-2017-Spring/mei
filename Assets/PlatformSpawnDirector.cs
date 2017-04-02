@@ -6,19 +6,27 @@ public class PlatformSpawnDirector : MonoBehaviour
 {
     public GameObject introSceneCeiling;
     public PlatformSpawner platformSpawner;
+    public Camera camera;
 
     [SerializeField] private float platformSpawnOffset;
 
-    private float lastSpawnedHeight;
-
-    void Start()
+    void Awake()
     {
+
     }
 
-	void Update () {
-        if (lastSpawnedHeight - transform.position.y < platformSpawnOffset)
+	void Update ()
+	{
+        /*
+	    Bounds screenBounds = camera.OrthographicBounds();
+        if (platformSpawner.MaxPlatformHeight - transform.position.y < platformSpawnOffset)
         {
-            lastSpawnedHeight = platformSpawner.SpawnNextPlatforms(10);
+            platformSpawner.SpawnNextPlatforms(10);
         }
+        while (platformSpawner.MinPlatformHeight < (screenBounds.center.y - screenBounds.)
+        {
+            platformSpawner.RemovePlatform();
+        }
+        */
 	}
 }

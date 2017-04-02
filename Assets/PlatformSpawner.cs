@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,6 +19,12 @@ public class PlatformSpawner : MonoBehaviour {
     [SerializeField] private float randomWalkMaxIncrement;
     [SerializeField] private float spawnPosIncrementY;
 
+    [SerializeField] private Camera camera;
+
+    private Queue<GameObject> latestPlatforms = new Queue<GameObject>();
+    public float MaxPlatformHeight { get; private set; }
+    public float MinPlatformHeight { get; private set; }
+
     private float spawnPosX;
     private float spawnPosY;
     private float sceneBoundLeft;
@@ -34,20 +41,35 @@ public class PlatformSpawner : MonoBehaviour {
         spawnPosY = spawnStartPositionObj.transform.position.y;
         sceneBoundLeft = leftWall.transform.position.x;
         sceneBoundRight = rightWall.transform.position.x;
+        Bounds screenBounds = camera.OrthographicBounds();
+        MinPlatformHeight = screenBounds.center.y - screenBounds.size.y / 2 + 0.5f;
+        MaxPlatformHeight = screenBounds.center.y + screenBounds.size.y / 2 + 0.5f;
+    }
+
+    void Start()
+    {
+        SpawnNextPlatforms(10);
     }
 
     void Update()
     {
+        Bounds screenBounds = camera.OrthographicBounds();
+        while (MaxPlatformHeight < screenBounds.center.y + screenBounds.size.y/2 + 1.0f)
+        {
+            SpawnPlatform();
+        }
+        while (MinPlatformHeight < screenBounds.center.y - screenBounds.size.y/2 - 1.0f)
+        {
+            RemovePlatform();
+        }
     }
 
-    public float SpawnNextPlatforms(int numPlatforms)
+    public void SpawnNextPlatforms(int numPlatforms)
     {
-        GameObject lastSpawnedPlatform = null;
         for (int i = 0; i < numPlatforms; i++)
         {
-            lastSpawnedPlatform = SpawnPlatform();
+            SpawnPlatform();
         }
-        return lastSpawnedPlatform.transform.position.y;
     }
 
     public GameObject SpawnPlatform()
@@ -67,10 +89,26 @@ public class PlatformSpawner : MonoBehaviour {
         spawnPosY += spawnPosIncrementY;
 
         GameObject platform = Instantiate(platformPrefab, new Vector3(spawnPosX, spawnPosY, 0.0f), Quaternion.identity);
+        latestPlatforms.Enqueue(platform);
         numPlatforms++;
 
         randomWalkMax += randomWalkMaxIncrement;
 
+        MaxPlatformHeight = spawnPosY;
+
         return platform;
+    }
+
+    public void RemovePlatform()
+    {
+        if (latestPlatforms.Count > 0)
+        {
+            GameObject bottomPlatform = latestPlatforms.Dequeue();
+            Destroy(bottomPlatform);
+            if (latestPlatforms.Count > 0)
+            {
+                MinPlatformHeight = latestPlatforms.Peek().transform.position.y;
+            }
+        }
     }
 }
