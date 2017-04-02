@@ -11,11 +11,11 @@ public class CatCollider : MonoBehaviour
 
         if (yAxisVelocity >= 0)
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platform"), true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platForm"), true);
         }
         else if (yAxisVelocity < 0)
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platform"), false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platForm"), false);
         }
     }
 }
