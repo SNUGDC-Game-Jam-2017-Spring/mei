@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CatJumper : MonoBehaviour {
     public CatAggro aggro;
+    public SoundPlayer soundPlayer;
 
     public float jumpPower1 = 10.0f;
     public float maxXAxisVelocity = 5.0f;
@@ -16,8 +17,9 @@ public class CatJumper : MonoBehaviour {
 
     static public float standing;
 
-    void Start () {
+    void Start () { 
         Debug.Assert(aggro != null);
+        Debug.Assert(soundPlayer != null);
     }
 	
 	void Update () { 
@@ -38,6 +40,7 @@ public class CatJumper : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0) && aggro.gotAggro.State && delayBuffer.HasEnoughCount() && standing <= 0.5)
         {
+            soundPlayer.PlayClip(SoundState.Jump);
             Vector2 delta = ( mousePos - delayBuffer.Get()) / Time.deltaTime;
             if (delta.y < 0)
             {
