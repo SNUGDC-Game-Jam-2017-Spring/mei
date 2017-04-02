@@ -11,7 +11,7 @@ public class CatCollider : MonoBehaviour
 
         if (yAxisVelocity > 0)
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platForm"), true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platform"), true);
             CatJumper.standing = yAxisVelocity;
         }
         else if (yAxisVelocity == 0)
@@ -20,7 +20,7 @@ public class CatCollider : MonoBehaviour
         }
         else
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platForm"), false);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("cat"), LayerMask.NameToLayer("platform"), false);
             CatJumper.standing = -yAxisVelocity;
         }
 
