@@ -26,7 +26,7 @@ public class Platform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && col.collider is BoxCollider2D)
         {
             isTouched = true;
         }
