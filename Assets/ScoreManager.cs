@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour {
             catHeight = cat.transform.position.y;
         }
 
-        score.text = "Score : " + catHeight;
+        score.text = "Score : " + Mathf.CeilToInt(catHeight*100);
 
 
     }
