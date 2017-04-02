@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CatCollider : MonoBehaviour
 {
-
-
     void Update()
     {
         var rb = GetComponent<Rigidbody2D>();
