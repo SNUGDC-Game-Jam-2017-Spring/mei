@@ -635,8 +635,9 @@ MonoBehaviour:
   aggroBound: {fileID: 332850664}
   neutralBound: {fileID: 332850667}
   aggroMeter: 0
-  aggroThreshold: 1000
+  aggroThreshold: 5000
   decayRate: 0.1
+  neutralRate: 0.5
   aggroCoeff: 0.1
 --- !u!114 &332850666
 MonoBehaviour:
