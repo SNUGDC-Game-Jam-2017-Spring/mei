@@ -3,7 +3,10 @@ using System.Collections;
 
 public class CatToy : MonoBehaviour
 {
+    public GameObject cat;
     private Vector3 mousePosition;
+    public GameObject ParticleSlow;
+    public GameObject ParticleBurst;
     Ray ray;
 
     
@@ -11,12 +14,16 @@ public class CatToy : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            GetComponent<Renderer>().enabled=false;
+            if (cat.GetComponent<CatAggro>().gotAggro.State)
+            {
+                var burstParticle = Instantiate(ParticleBurst) as GameObject;
+                burstParticle.transform.position = ray.origin;
+            }
+
         }
 
-        else if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-            GetComponent<Renderer>().enabled = true;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             transform.position = ray.origin;
         }

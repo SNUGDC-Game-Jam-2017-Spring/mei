@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4430071452811608}
   - component: {fileID: 198265820500997828}
   - component: {fileID: 199465849694405268}
+  - component: {fileID: 114164326819258574}
   m_Layer: 0
-  m_Name: CatToyParticle
+  m_Name: CatToyParticleSlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114164326819258574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1225356627914236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597473f2803dcf24ab2cb7415c73b351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198265820500997828
 ParticleSystem:
   m_ObjectHideFlags: 1
