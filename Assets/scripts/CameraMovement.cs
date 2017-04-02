@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 { 
     public GameObject cat;
-    Vector3 cameraPosition;
+    public static Vector3 cameraPosition;
     public float HeightRecorder;
 
 
