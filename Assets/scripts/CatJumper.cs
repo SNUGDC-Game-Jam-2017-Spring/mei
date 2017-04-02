@@ -36,7 +36,7 @@ public class CatJumper : MonoBehaviour {
             delayBuffer.Add(mousePos);
         }
 
-        if (Input.GetMouseButtonUp(0) && aggro.aggroMeter > aggro.aggroThreshold && delayBuffer.HasEnoughCount() && standing <= 0.5)
+        if (Input.GetMouseButtonUp(0) && aggro.gotAggro.State && delayBuffer.HasEnoughCount() && standing <= 0.5)
         {
             Vector2 delta = ( mousePos - delayBuffer.Get()) / Time.deltaTime;
             if (delta.y < 0)
