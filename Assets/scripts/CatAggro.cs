@@ -3,6 +3,7 @@
 public class CatAggro : MonoBehaviour
 {
     public Collider2D aggroBound;
+    public Collider2D neutralBound;
 
     public float aggroMeter = 0;
     public float aggroThreshold = 1000f;
@@ -28,8 +29,8 @@ public class CatAggro : MonoBehaviour
         var currPos = (Vector2)mousePos;
 
 		speedometer.AddPosition(currPos, Time.deltaTime);
-		aggroMeter *= DecayCoeff(Time.deltaTime);
 
+        bool aggroDecay = true;
 		if (Input.GetMouseButton(0))
         {
             if (aggroBound.OverlapPoint(currPos))
@@ -38,7 +39,15 @@ public class CatAggro : MonoBehaviour
 				if (accel.HasValue) {
                 	aggroMeter += accel.Value.magnitude * aggroCoeff;
 				}
+                aggroDecay = false;
+            }
+            else if (aggroBound.OverlapPoint(currPos))
+            {
+                aggroDecay = false;
             }
 		}
+
+        if (aggroDecay) 
+            aggroMeter *= DecayCoeff(Time.deltaTime);
     }
 }
