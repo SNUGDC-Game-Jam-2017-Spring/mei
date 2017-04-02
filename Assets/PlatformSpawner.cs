@@ -89,6 +89,7 @@ public class PlatformSpawner : MonoBehaviour {
         spawnPosY += spawnPosIncrementY;
 
         GameObject platform = Instantiate(platformPrefab, new Vector3(spawnPosX, spawnPosY, 0.0f), Quaternion.identity);
+        platform.transform.parent = transform;
         latestPlatforms.Enqueue(platform);
         numPlatforms++;
 
