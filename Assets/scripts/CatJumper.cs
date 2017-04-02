@@ -14,6 +14,8 @@ public class CatJumper : MonoBehaviour {
     public DelayBuffer<Vector3> delayBuffer = null;
     public Vector2 Force=Vector2.zero;
 
+    static public float standing;
+
     void Start () {
         Debug.Assert(aggro != null);
     }
@@ -34,7 +36,7 @@ public class CatJumper : MonoBehaviour {
             delayBuffer.Add(mousePos);
         }
 
-        if (Input.GetMouseButtonUp(0) && aggro.aggroMeter > aggro.aggroThreshold && delayBuffer.HasEnoughCount())
+        if (Input.GetMouseButtonUp(0) && aggro.aggroMeter > aggro.aggroThreshold && delayBuffer.HasEnoughCount() && standing <= 0.5)
         {
             Vector2 delta = ( mousePos - delayBuffer.Get()) / Time.deltaTime;
             if (delta.y < 0)
