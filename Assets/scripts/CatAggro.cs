@@ -38,10 +38,10 @@ public class CatAggro : MonoBehaviour
 	
     void Update()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var currPos = (Vector2)mousePos;
+        var mousePos = Input.mousePosition;
+        var currPos = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
 
-		speedometer.AddPosition(currPos, Time.deltaTime);
+		speedometer.AddPosition(mousePos / Screen.dpi, Time.deltaTime);
 
 		if (Input.GetMouseButton(0))
         {
